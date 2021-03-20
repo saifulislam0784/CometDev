@@ -20,3 +20,11 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+
+
+
+Route::get('admin/login', [App\Http\Controllers\AdminController::class , 'ShowAdminLogin']) ->name('admin.login');
+Route::get('admin/register', [App\Http\Controllers\AdminController::class , 'ShowAdminRegister']) ->name('admin.register');
+Route::get('admin/dashboard', [App\Http\Controllers\AdminController::class , 'ShowAdminDashboard']) ->name('admin.dashboard');
