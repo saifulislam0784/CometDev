@@ -14,8 +14,8 @@
                 <li class="submenu">
                     <a href="#"><i class="fe fe-document"></i> <span> Blog </span> <span class="menu-arrow"></span></a>
                     <ul style="display: none;">
-                        <li><a href="login.html"> Posts </a></li>
-                        <li><a href="register.html"> catagory </a></li>
+                        <li><a href="{{route('post.index')}}"> Posts </a></li>
+                        <li><a href=" {{route('category.index')}} "> catagory </a></li>
                         <li><a href="forgot-password.html"> Tag </a></li>
 
                     </ul>

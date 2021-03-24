@@ -38,3 +38,4 @@ Route::post('admin/register', [App\Http\Controllers\Auth\RegisterController::cla
 
 
 Route::resource('post', 'App\Http\Controllers\PostController');
+Route::resource('category', 'App\Http\Controllers\CategoryController');
