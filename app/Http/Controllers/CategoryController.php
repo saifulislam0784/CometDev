@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -13,7 +15,11 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('admin.post.category.index');
+
+        $data = Category::all();
+        return view('admin.post.category.index', [
+            'all_data'      =>  $data
+        ]);
     }
 
     /**
@@ -34,7 +40,20 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this -> validate($request, [
+
+            'name' => 'required'
+
+        ]);
+
+        Category::create([
+
+            'name' => $request -> name,
+            'slug' => Str::slug($request -> name),
+
+        ]);
+
+        return redirect()-> route('category.index') -> with('success', 'Category added');
     }
 
     /**
@@ -45,7 +64,7 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
@@ -56,7 +75,12 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $edit_data = Category::find($id);
+
+        return [
+            'id'    => $edit_data -> id,
+            'name'  => $edit_data -> name
+        ];
     }
 
     /**
@@ -68,7 +92,14 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $edit_id = $request -> edit_id;
+
+        $edit_data =  Category::find($edit_id);
+        $edit_data -> name = $request -> name;
+        $edit_data -> slug = Str::slug($request -> name);
+        $edit_data -> update();
+
+        return redirect() -> back() -> with('success', 'Category updated successful');
     }
 
     /**
@@ -79,6 +110,35 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $delete_data = Category::find($id);
+
+        $delete_data -> delete();
+
+        return redirect() -> back() -> with('success' , 'Category deleted successful');
     }
+
+
+
+    /**
+     *
+     */
+    public function statusUpdateInactive($id){
+
+        $status_update = Category::find($id);
+        $status_update -> status = false;
+        $status_update -> update();
+    }
+
+    /**
+     *
+     */
+    public function statusUpdateActive($id){
+
+        $status_update = Category::find($id);
+        $status_update -> status = true;
+        $status_update -> update();
+    }
+
+
+
 }
