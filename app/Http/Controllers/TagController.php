@@ -95,6 +95,10 @@ class TagController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $delete_data = Tag::find($id);
+
+        $delete_data -> delete();
+
+        return redirect() -> back() -> with('success' , 'Category deleted successful');
     }
 }

@@ -25,6 +25,19 @@ Route::get('/', function () {
 
 
 
+// Frontend controller
+
+
+Route::get('blog', [App\Http\Controllers\BlogPageController::class , 'showBlogPage']);
+
+
+
+
+
+
+
+// Admin template load
+
 Route::get('admin/login', [App\Http\Controllers\AdminController::class , 'ShowAdminLogin']) ->name('admin.login');
 Route::get('admin/register', [App\Http\Controllers\AdminController::class , 'ShowAdminRegister']) ->name('admin.register');
 Route::get('admin/dashboard', [App\Http\Controllers\AdminController::class , 'ShowAdminDashboard']) ->name('admin.dashboard');
@@ -38,7 +51,8 @@ Route::post('admin/register', [App\Http\Controllers\Auth\RegisterController::cla
 // Post Route
 
 Route::resource('post', 'App\Http\Controllers\PostController');
-
+Route::get('post-trash', 'App\Http\Controllers\PostController@postTrashShow') -> name('post.trash');
+Route::get('post-trash-update/{id}', 'App\Http\Controllers\PostController@postTrashUpdate') -> name('post.trash.update');
 
 
 // Post Category Route

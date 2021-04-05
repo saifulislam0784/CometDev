@@ -56,6 +56,7 @@
                                             <th>Action</th>
                                         </tr>
                                         </thead>
+
                                         <tbody>
 
                                         @foreach( $all_data as $data )
@@ -74,7 +75,7 @@
                                                     {{--                                                <a class="btn btn-sm btn-info" href="#"><i class="fa fa-eye" aria-hidden="true"></i></a>--}}
                                                     <a edit_id="{{ $data -> id }}" class="btn btn-sm btn-warning edit_cat" href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
 
-                                                    <form class="d-inline" action="{{ route('category.destroy', $data -> id) }}" method="POST">
+                                                    <form class="d-inline" action="{{ route('tag.destroy', $data -> id) }}" method="POST">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button class="btn btn-danger btn-sm delete-btn"><i class="fa fa-trash" aria-hidden="true"></i></button>

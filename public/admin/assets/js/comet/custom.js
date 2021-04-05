@@ -2,6 +2,13 @@
 
     $(document).ready(function(){
 
+
+         // Load CK Editors
+         CKEDITOR.replace('post_editor');
+
+         // Select 2
+        $('.post_tag_select').select2();
+
         // logout feature
 
         $(document).on('click', '#logout_btn', function(e){
@@ -75,6 +82,65 @@
 
 
     });
+
+
+    // Post img load
+    $('#post_img_select').change(function (e) {
+
+        let img_url =  URL.createObjectURL(e.target.files[0]);
+        $('.post_img_load').attr('src', img_url);
+
+    });
+
+
+
+    // Post img load
+    $('#post_img_select_g').change(function (e) {
+
+        let img_gall = '';
+        for(let i = 0; i < e.target.files.length ; i++){
+            let file_url = URL.createObjectURL(e.target.files[i]);
+            img_gall += '<img class="shadow" src="'+file_url+'">';
+        }
+
+        $('.post-gallery-img').html(img_gall);
+
+
+    });
+
+
+
+    // Select Post Format
+    $('#post_format').change(function () {
+
+        let format = $(this).val();
+
+        if( format == 'Image' ){
+            $('.post-image').show();
+        }else {
+            $('.post-image').hide();
+        }
+
+        if( format == 'Gallery' ){
+            $('.post-gallery').show();
+        }else {
+            $('.post-gallery').hide();
+        }
+
+        if( format == 'Video' ){
+            $('.post-video').show();
+        }else {
+            $('.post-video').hide();
+        }
+
+        if( format == 'Audio' ){
+            $('.post-audio').show();
+        }else {
+            $('.post-audio').hide();
+        }
+
+    });
+
 
 
 
