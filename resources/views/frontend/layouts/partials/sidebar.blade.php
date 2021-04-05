@@ -9,44 +9,58 @@
       <!-- end of widget        -->
       <div class="widget">
         <h6 class="upper">Categories</h6>
+
+
         <ul class="nav">
-          <li><a href="#">Fashion</a>
-          </li>
-          <li><a href="#">Tech</a>
-          </li>
-          <li><a href="#">Gaming</a>
-          </li>
-          <li><a href="#">Food</a>
-          </li>
-          <li><a href="#">Lifestyle</a>
-          </li>
-          <li><a href="#">Money</a>
-          </li>
+            @php
+            $all_cat = App\Models\Category::all();
+            @endphp
+            @foreach($all_cat  as $cat)
+            <li><a href="{{ $cat -> id }}">{{ $cat -> name }}</a>
+            </li>
+            @endforeach
+
         </ul>
+
       </div>
+
+
       <!-- end of widget        -->
       <div class="widget">
-        <h6 class="upper">Popular Tags</h6>
-        <div class="tags clearfix"><a href="#">Design</a><a href="#">Fashion</a><a href="#">Startups</a><a href="#">Tech</a><a href="#">Web</a><a href="#">Lifestyle</a>
+            <h6 class="upper">Popular Tags</h6>
+            <div class="tags clearfix">
+                @php
+                    $all_tag = App\Models\Tag::all();
+                @endphp
+                @foreach( $all_tag  as $tag)
+                <a href="{{ $tag -> id }}">{{ $tag -> name }}</a>
+                @endforeach
+
+            </div>
         </div>
-      </div>
+
+
+
       <!-- end of widget      -->
       <div class="widget">
         <h6 class="upper">Latest Posts</h6>
         <ul class="nav">
-          <li><a href="#">Checklists for Startups<i class="ti-arrow-right"></i><span>30 Sep, 2015</span></a>
-          </li>
-          <li><a href="#">The Death of Thought<i class="ti-arrow-right"></i><span>29 Sep, 2015</span></a>
-          </li>
-          <li><a href="#">Give it five minutes<i class="ti-arrow-right"></i><span>24 Sep, 2015</span></a>
-          </li>
-          <li><a href="#">Uber launches in Las Vegas<i class="ti-arrow-right"></i><span>20 Sep, 2015</span></a>
-          </li>
-          <li><a href="#">Fun with Product Hunt<i class="ti-arrow-right"></i><span>16 Sep, 2015</span></a>
-          </li>
+
+            @php
+                $all_post = App\Models\POST::where('status', true) -> take(5) ->  latest() -> get();
+            @endphp
+            @foreach( $all_post as $post)
+            <li><a href="{{ $post -> slug }}">{{ $post -> title }}<i class="ti-arrow-right"></i><span>{{ date('d M, Y', strtotime($post -> created_at) ) }}</span></a>
+            </li>
+            @endforeach
+
+
         </ul>
-      </div>
+    </div>
       <!-- end of widget          -->
+
+
+
     </div>
     <!-- end of sidebar-->
   </div>

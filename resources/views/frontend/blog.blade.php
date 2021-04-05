@@ -21,7 +21,7 @@
             <article class="post-single">
               <div class="post-info">
                 <h2><a href="#">{{ $post -> title }}</a></h2>
-                <h6 class="upper"><span>By</span><a href="#"> Admin</a><span class="dot"></span><span>28 September 2015</span><span class="dot"></span><a href="#" class="post-tag">Startups</a></h6>
+                <h6 class="upper"><span>By</span><a href="#"> Admin</a><span class="dot"></span><span>{{ date('d M, Y', strtotime($post -> created_at) ) }}</span><span class="dot"></span><a href="#" class="post-tag">Startups</a></h6>
               </div>
 
                 @if ($featured -> post_type == 'Image')
@@ -47,6 +47,15 @@
                                 </li>
                                 @endforeach
                             </ul>
+                        </div>
+                    </div>
+                  @endif
+
+
+                  @if( $featured -> post_type == 'Video' )
+                    <div class="post-media">
+                        <div class="media-video">
+                            <iframe src="{{ $featured -> post_video }}" frameborder="0"></iframe>
                         </div>
                     </div>
                   @endif
